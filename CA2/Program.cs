@@ -4,7 +4,6 @@ namespace CA2
 {
     internal class Program
     {
-
         static string[] bookIDs = new string[5];
         static double[] scores = new double[5];
         static int count = 0;
