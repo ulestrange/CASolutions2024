@@ -12,6 +12,15 @@ namespace BookReviewFileManagement
 
         public string BookID { get; set; }
 
+        public BookReview()
+        {
+        }
+
+        public BookReview(string id, double review)
+        {
+            BookID = id;
+            Review = review;
+        }
 
         public string GetCategoryDescription()
         {

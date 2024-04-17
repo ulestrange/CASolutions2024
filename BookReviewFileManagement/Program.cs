@@ -7,15 +7,15 @@
         static string[] categoryDescriptions = { "Poor", "Fair", "Good", "Very Good", "Excellant" };
         static int[] categoryCounts = new int[5];
         static double[] categorySums = new double[5];
-        static int countReviews;
-        static int countLines;
+        static int countReviews; // valid reviews
+        static int countLines; // lines read so far
         static void Main(string[] args)
         {
 
 
 
 
-            string path = "../../../bookReviews.txt";
+            string path = "../../../bookReviews3.txt";
             ReadReviewsFromFile(path);
 
            // GenerateCategoryData();
@@ -38,9 +38,9 @@
                         if (fields.Length == 2 && IsValidBookID(fields[0])
                             && IsValidReviewScore(fields[1]))
                         {
-                            BookReview bookReview = new BookReview();
-                            bookReview.BookID = fields[0];
-                            bookReview.Review = Double.Parse(fields[1]);
+                            BookReview bookReview = new BookReview(fields[0],
+                                Double.Parse(fields[1]));
+   
                             bookReviews[countReviews] = bookReview;
                             countReviews++;
 
@@ -52,7 +52,7 @@
                         }
                         else
                         {
-                            Console.WriteLine($"Error on line {countLines}");
+                            Console.WriteLine($"Error on line {countLines+1}");
                         }
 
                         countLines++;
