@@ -2,7 +2,6 @@
 {
     internal class Program
     {
-
         static BookReview[] bookReviews = new BookReview[50];
 
         static string[] categoryDescriptions = { "Poor", "Fair", "Good", "Very Good", "Excellant" };
