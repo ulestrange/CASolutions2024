@@ -4,7 +4,149 @@
  * Descriptiopn
  * 
  * CA1
- */
+ */using System.Net;
+
+namespace Part_3
+{
+    /*
+     * Ryan Barry
+     * S00250496
+     * Program is not fully functioning yet due to lack of time
+     */
+
+
+    internal class Program
+    {
+        static string[] rating = { "Excellent", "Very Good", "Good", "Fair", "Poor" };
+        static int[] ratingFrequency = new int[rating.Length];
+
+        static void Main(string[] args)
+        {
+            string[] bookID = new string[5];
+            double[] scores = new double[5];
+
+            GetValidBookID(bookID, scores);
+
+        }
+        static void GetValidBookID(string[] bookID, double[] score)
+        {
+
+            for (int i = 0; i < bookID.Length; i++)
+            {
+                try
+                {
+                    Console.Write("Please enter a Book ID (or -999 to finish) > ");
+                    bookID[i] = Console.ReadLine();
+                    if (bookID[i] == "-999")
+                    {
+                        BookReport(bookID, score);
+                        RatingReport(bookID, score);
+                        break;
+                    }
+
+                    //if (bookID[i][0] != 'b' || bookID[i][0] != 'B') throw new IndexOutOfRangeException();
+                    //if (bookID[i][6] != ' ') throw new IndexOutOfRangeException();
+
+                    Console.Write("Please enter a score > ");
+                    string scoreText = Console.ReadLine();
+                    score[i] = double.Parse(scoreText);
+
+                    Console.WriteLine($"This Book is Rated as {GiveRatingMesssage(score[i])}");
+                }
+                catch (IndexOutOfRangeException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+
+            }
+
+
+        }
+        static string GiveRatingMesssage(double score)
+        {
+            try
+            {
+                if (score < 0 || score > 5) throw new IndexOutOfRangeException();
+
+                if (score > 0 && score <= 1)
+                {
+                    ratingFrequency[4]++;
+                    return rating[4];
+                }
+                else if (score > 1 && score <= 2)
+                {
+                    ratingFrequency[3]++;
+                    return rating[3];
+                }
+                else if (score > 2 && score <= 3)
+                {
+                    ratingFrequency[2]++;
+                    return rating[2];
+                }
+                else if (score > 3 && score <= 4)
+                {
+                    ratingFrequency[1]++;
+                    return rating[1];
+                }
+                else
+                {
+                    ratingFrequency[0]++;
+                    return rating[0];
+                }
+
+            }
+            catch (IndexOutOfRangeException e)
+            {
+                return e.Message;
+            }
+
+        }
+        static void BookReport(string[] bookID, double[] score)
+        {
+            Console.WriteLine("------------------------------");
+            Console.WriteLine("Book Report");
+            Console.WriteLine("Book ID   Score");
+            for (int i = 0; i < bookID.Length; i++)
+            {
+                if (bookID[i] == "-999")
+                {
+                    break;
+                }
+                Console.WriteLine(bookID[i] + "     " + score[i]);
+            }
+        }
+        static void RatingReport(string[] bookID, double[] score)
+        {
+            double total = 0;
+            string currentHighest = "b987654";
+            Console.WriteLine("------------------------------");
+            Console.WriteLine("Rating Report");
+            Console.WriteLine("Rating    Number of Books    Average Score");
+            for (int i = rating.Length; i > 0; i--)
+            {
+                Console.WriteLine(rating[i] + " " + ratingFrequency[i]);
+            }
+            Console.WriteLine($"Total Reviews : {score.Length}");
+            for (int i = 0; i < score.Length; i++)
+            {
+                total += score[i];
+            }
+            Console.WriteLine($"Overall Average {total / score.Length}");
+            for (int i = 0; i < score.Length; i++)
+            {
+                if (score[i] > score[i + 1])
+                {
+                    currentHighest = bookID[i];
+                }
+            }
+            Console.WriteLine($"Book with Highest Score: {currentHighest}");
+
+        }
+
+
+    }
+}
+
 
 namespace Q1
 {

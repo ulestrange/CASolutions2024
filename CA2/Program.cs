@@ -12,7 +12,7 @@ namespace CA2
         static string bestBookID = "";
         static double bestScore = -1;
 
-        // static string[] categoryDescriptions = { "0 -1", "1+ -2", "2+ -3", "3+ -4", "4+ -5" };
+     
         static string[] categoryDescriptions = { "Poor", "Fair", "Good", "Very Good", "Excellant" };
 
         static int[] categoryCounts = new int[5];
@@ -110,7 +110,11 @@ namespace CA2
 
         }
 
-        //
+        /// <summary>
+        /// gets either a valid bookID or -999 from the user
+        /// keeps prompting until the user enters a proper entry
+        /// </summary>
+        /// <returns></returns>
 
         static string GetBookIDFromUser()
         {
