@@ -2,6 +2,10 @@
 {
     internal class Program
     {
+
+
+
+
         static BookReview[] bookReviews = new BookReview[50];
 
         static string[] categoryDescriptions = { "Poor", "Fair", "Good", "Very Good", "Excellant" };
@@ -12,7 +16,11 @@
         static void Main(string[] args)
         {
 
+      
 
+            BookReview bookRev = new BookReview("b123", 45);
+
+            double review = bookRev.Review;
 
 
             string path = "../../../bookReviews3.txt";
@@ -35,7 +43,7 @@
                     {
                         string[] fields = s.Split(',');
 
-                        if (fields.Length == 2 && IsValidBookID(fields[0])
+                        if (fields.Length == 2 && BookReview.IsValidBookID(fields[0])
                             && IsValidReviewScore(fields[1]))
                         {
                             BookReview bookReview = new BookReview(fields[0],
@@ -66,22 +74,7 @@
             }
         }
 
-        static bool IsValidBookID(string bookID)
-        {
-            if (bookID.Length != 7 || !bookID.StartsWith('B'))
-                return false;
 
-            else
-            {
-                for (int i = 1; i < 7; i++)
-                {
-                    if (bookID[i] > '9' || bookID[i] < '0')
-                        return false;
-                }
-
-                return true;
-            }
-        }
 
         static bool IsValidReviewScore(string input)
         {

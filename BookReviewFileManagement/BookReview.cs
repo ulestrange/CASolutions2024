@@ -3,12 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace BookReviewFileManagement
 {
     internal class BookReview
     {
-        public double Review { get; set; }
+        public double Review
+        {
+            get
+            {
+                return Review;
+            }
+
+             set
+            {
+                if (value < 0 || value > 5)
+                {
+                    throw new ArgumentException("review score must be between 0 and 5");
+                        }
+                Review = value;
+            }
+        }
 
         public string BookID { get; set; }
 
@@ -16,9 +32,22 @@ namespace BookReviewFileManagement
         {
         }
 
+
+        /// <summary>
+        /// The review score must be between 1 and 5 or an exception will be thrown
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="review"></param>
         public BookReview(string id, double review)
         {
             BookID = id;
+
+
+            if (review < 0 || review > 5)
+            {
+                throw new ArgumentException("review score must be between 0 and 5");
+            }
+
             Review = review;
         }
 
@@ -48,6 +77,30 @@ namespace BookReviewFileManagement
             }
             return ratingCategory;
         }
+
+        /// <summary>
+        /// this takes a string and returns true if it is a Valid BookID
+        /// </summary>
+        /// <param name="bookID"></param>
+        /// <returns></returns>
+
+        public static bool IsValidBookID(string bookID)
+        {
+            if (bookID.Length != 7 || !bookID.StartsWith('B'))
+                return false;
+
+            else
+            {
+                for (int i = 1; i < 7; i++)
+                {
+                    if (bookID[i] > '9' || bookID[i] < '0')
+                        return false;
+                }
+
+                return true;
+            }
+        }
+
     }
 }
 
